@@ -1,0 +1,64 @@
+#BEGIN
+
+""" Program Begin HERE
+Some data Exploration using Python. Assuming that all the needed packages
+ are already install for your IDE to find them.
+"""
+#############################################################
+#Program name - Data Exploration
+#input - NONE
+#output - Some Exploration statistics
+###############################################################
+import pandas as pd
+
+# Create data_frame of array values
+df = pd.DataFrame({
+    'Name':['Matt','Lisa','Richard','John','Julia','Jane','Marlon'],
+    'Age':[23,78,22,19,45,33,20],
+    'Gender':['M','F','M','M','M','F','M'],
+    'State':['DC','CO','DE','VA','MD','DE','NY'],
+    'Years of Service':[10,0,2,0,2,1,5],
+    'IQ':[300,100,110,200,300,10,40]
+})
+########################################################
+# BEGIN extract a 25% sample of data
+########################################################
+rows = df.sample(frac =.25)
+# validate first to check if sample is 0.25 times data or not
+if 0.25*len(df)== len(rows):
+    print(len(df), len(rows))
+
+# Display Sample Percentage
+print ('Sample of 25%',rows)
+
+#END extract a 25% sample of data
+############################################################
+# BEGIN Split categorical variables by gender, Sum, Mean, count,
+# and describe on the data
+############################################################
+
+#Categorical Variables splitting
+print()
+print(" - Average Age by Gender - ")
+groupby_gender = df.groupby('Gender')
+for Gender, value in groupby_gender['IQ']:
+    print((Gender, value.mean()))
+
+# Find the Summation of all ages in the data
+print()
+SumofAge=df['Age'].sum()
+print ('Sum of Ages:', SumofAge)
+# Mean age
+print()
+MeanAge = df['Age'].mean()
+print ('Average of Age:', MeanAge)
+# Find the mean of all columns
+print()
+print (' - Means of Each Column - ')
+print (df.mean(axis=0))
+# Describe the Data
+print()
+print(" - Describing the IQ Data - ")
+print (df['IQ'].describe())
+
+#END
